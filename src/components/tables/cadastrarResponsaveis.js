@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
-function FormularioEditarEmpresa({ onSubmit }) {
+function FormularioCadastroResponsaveis({ onSubmit }) {
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
-    endereco: '',
-    foto_perfil: '',
-    cnpj: '',
+    cargo: '',
+    tipo: '',
+    empresa_id: '',
+    ict_id: '',
   });
 
   // Função para lidar com mudanças nos campos
@@ -24,23 +25,22 @@ function FormularioEditarEmpresa({ onSubmit }) {
     if (onSubmit) {
       onSubmit(formData); // Envia os dados para a função recebida via props
     }
-    console.log('Dados da empresa cadastrada:', formData);
+    console.log('Responsável cadastrado:', formData);
     // Resetar formulário (opcional)
     setFormData({
       nome: '',
       email: '',
-      endereco: '',
-      foto_perfil: '',
-      cnpj: '',
+      cargo: '',
+      tipo: '',
     });
   };
 
   return (
     <div className="container mt-4">
-      <h2>Cadastro de Empresa</h2>
+      <h2>Cadastro de Responsável</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="nome" className="form-label">Nome da Empresa</label>
+          <label htmlFor="nome" className="form-label">Nome</label>
           <input
             type="text"
             id="nome"
@@ -64,39 +64,31 @@ function FormularioEditarEmpresa({ onSubmit }) {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="endereco" className="form-label">Endereço</label>
+          <label htmlFor="cargo" className="form-label">Cargo</label>
           <input
             type="text"
-            id="endereco"
-            name="endereco"
+            id="cargo"
+            name="cargo"
             className="form-control"
-            value={formData.endereco}
+            value={formData.cargo}
             onChange={handleChange}
             required
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="foto_perfil" className="form-label">URL da Foto do Perfil</label>
-          <input
-            type="url"
-            id="foto_perfil"
-            name="foto_perfil"
-            className="form-control"
-            value={formData.foto_perfil}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="cnpj" className="form-label">CNPJ</label>
-          <input
-            type="text"
-            id="cnpj"
-            name="cnpj"
-            className="form-control"
-            value={formData.cnpj}
+          <label htmlFor="tipo" className="form-label">Tipo</label>
+          <select
+            id="tipo"
+            name="tipo"
+            className="form-select"
+            value={formData.tipo}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="" disabled>Selecione o Tipo</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Usuário">Usuário</option>
+          </select>
         </div>
         <button type="submit" className="btn btn-primary">Cadastrar</button>
       </form>
@@ -104,4 +96,4 @@ function FormularioEditarEmpresa({ onSubmit }) {
   );
 }
 
-export default FormularioEditarEmpresa;
+export default FormularioCadastroResponsaveis;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ResponsaveisTable from '../../components/tables/responsaveisTable';
-function ResponsaveisPage() {
+import AdminLayout from '../../layouts/adminLayout';
+function AdminResponsaveisPage() {
   const [usuarios, setUsuarios] = useState([]);
 
   // Simula a busca de dados (poderia ser uma chamada de API)
@@ -23,15 +24,17 @@ function ResponsaveisPage() {
   };
 
   return (
-    <div className="container mt-4">
-      <h1>Lista de Usuários</h1>
-      <ResponsaveisTable 
-        usuarios={usuarios} 
-        onEdit={handleEdit} 
-        onDelete={handleDelete} 
-      />
-    </div>
+    <AdminLayout>
+      <div className="container mt-4">
+        <h1>Responsaveis Cadastrados</h1>
+        <ResponsaveisTable
+          usuarios={usuarios}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+      </div>
+    </AdminLayout>
   );
 }
 
-export default ResponsaveisPage;
+export default AdminResponsaveisPage;
