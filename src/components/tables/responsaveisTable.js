@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ResponsaveisTable({ usuarios, onEdit, onDelete }) {
+function ResponsaveisTable({ responsaveis, onEdit, onDelete }) {
   return (
     <div className="table-responsive">
       <table className="table table-bordered table-hover">
@@ -10,27 +10,29 @@ function ResponsaveisTable({ usuarios, onEdit, onDelete }) {
             <th>Email</th>
             <th>Cargo</th>
             <th>Tipo</th>
+            <th>Vínculo</th> {/* Mostra Empresa ou ICT */}
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          {usuarios.length > 0 ? (
-            usuarios.map((usuario, index) => (
+          {responsaveis.length > 0 ? (
+            responsaveis.map((responsavel, index) => (
               <tr key={index}>
-                <td>{usuario.nome}</td>
-                <td>{usuario.email}</td>
-                <td>{usuario.cargo}</td>
-                <td>{usuario.tipo}</td>
+                <td>{responsavel.nome}</td>
+                <td>{responsavel.email}</td>
+                <td>{responsavel.cargo}</td>
+                <td>{responsavel.tipo}</td>
+                <td>
+                  {responsavel.empresa
+                    ? responsavel.empresa.nome
+                    : responsavel.ict
+                    ? responsavel.ict.nome
+                    : 'Sem vínculo'}
+                </td>
                 <td>
                   <button
-                    className="btn btn-warning me-2"
-                    onClick={() => onEdit(usuario)}
-                  >
-                    <i className="bi bi-pencil"></i> Editar
-                  </button>
-                  <button
                     className="btn btn-danger"
-                    onClick={() => onDelete(usuario)}
+                    onClick={() => onDelete(responsavel)}
                   >
                     <i className="bi bi-trash"></i> Excluir
                   </button>
@@ -39,8 +41,8 @@ function ResponsaveisTable({ usuarios, onEdit, onDelete }) {
             ))
           ) : (
             <tr>
-              <td colSpan="5" className="text-center">
-                Nenhum usuário encontrado.
+              <td colSpan="6" className="text-center">
+                Nenhum responsável encontrado.
               </td>
             </tr>
           )}
