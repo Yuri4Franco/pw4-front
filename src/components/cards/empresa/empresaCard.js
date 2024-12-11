@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
 
-function EmpresaCard({ nome, email, endereco, foto_perfil, cnpj, onEdit, onDelete, onViewColaboradores}) {
+const backendBaseUrl = 'http://127.0.0.1:3001'; // Base URL do backend
+
+function EmpresaCard({ nome, email, endereco, foto_perfil, cnpj, onEdit, onDelete, onViewColaboradores }) {
   const [showCnpj, setShowCnpj] = useState(false);
+
+  // Monta a URL completa da imagem
+  const imageUrl = foto_perfil ? `${backendBaseUrl}${foto_perfil}` : '/default-profile.jpeg';
 
   return (
     <div className="card mb-3" style={{ width: '18rem' }}>
-      <img src={foto_perfil} className="card-img-top" alt={`${nome} perfil`} />
+      <img 
+        src={imageUrl} 
+        className="card-img-top" 
+        alt={`${nome} perfil`} 
+        style={{ 
+          width: '100%', 
+          height: '12rem', 
+          objectFit: 'cover' // Garante que a imagem se ajusta ao container sem distorcer
+        }} 
+      />
       <div className="card-body">
         <h5 className="card-title">{nome}</h5>
         <p className="card-text"><strong>Email:</strong> {email}</p>
@@ -42,3 +56,4 @@ function EmpresaCard({ nome, email, endereco, foto_perfil, cnpj, onEdit, onDelet
 }
 
 export default EmpresaCard;
+  

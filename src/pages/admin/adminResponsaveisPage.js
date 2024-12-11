@@ -14,6 +14,7 @@ function AdminResponsaveisPage() {
   const [filteredResponsaveis, setFilteredResponsaveis] = useState([]);
   const [searchName, setSearchName] = useState('');
   const [filterEmpresa, setFilterEmpresa] = useState('');
+  const [filterIct, setFilterIct] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
   const [selectedResponsavel, setSelectedResponsavel] = useState(null);
@@ -53,8 +54,14 @@ function AdminResponsaveisPage() {
       );
     }
 
+    if (filterIct) {
+      filtered = filtered.filter(
+        (responsavel) => responsavel.ict?.id.toString() === filterIct
+      );
+    }
+
     setFilteredResponsaveis(filtered);
-  }, [searchName, filterEmpresa, responsaveis]);
+  }, [searchName, filterEmpresa, filterIct, responsaveis]);
 
   const handleAddResponsavel = async (formData) => {
     try {
@@ -119,19 +126,33 @@ function AdminResponsaveisPage() {
               ))}
             </select>
           </div>
+          <div className="col-md-4">
+            <select
+              className="form-control"
+              value={filterIct}
+              onChange={(e) => setFilterIct(e.target.value)}
+            >
+              <option value="">Filtrar por ICT</option>
+              {icts.map((ict) => (
+                <option key={ict.id} value={ict.id}>
+                  {ict.nome}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <button className="btn btn-success mb-3" onClick={() => setShowModal(true)}>
           + Novo Responsável
         </button>
-        
+
         <ResponsaveisTable
           responsaveis={filteredResponsaveis}
           onDelete={handleDelete}
         />
-        
+
         {(showModal || confirmModal) && <div className="modal-backdrop"></div>}
-        
+
         {showModal && (
           <FormularioCadastroResponsaveis
             onSubmit={handleAddResponsavel}
@@ -140,7 +161,7 @@ function AdminResponsaveisPage() {
             icts={icts}
           />
         )}
-        
+
         {confirmModal && (
           <ConfirmModal
             show={confirmModal}
@@ -149,7 +170,7 @@ function AdminResponsaveisPage() {
             message={`Tem certeza que deseja excluir ${selectedResponsavel?.nome}?`}
           />
         )}
-        
+
         <ToastContainer position="top-right" autoClose={3000} />
       </div>
     </AdminLayout>

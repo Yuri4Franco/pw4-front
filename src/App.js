@@ -4,7 +4,7 @@ import { AuthProvider } from './contexts/authContext';
 import LoginPage from './pages/loginPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import AdminPage from './pages/admin/adminPage';
+
 import AdminEmpresasPage from './pages/admin/adminEmpresasPage';
 import AdminIctsPage from './pages/admin/adminIctsPage';
 import AdminResponsaveisPage from './pages/admin/adminResponsaveisPage';
@@ -12,9 +12,13 @@ import AdminResponsaveisPage from './pages/admin/adminResponsaveisPage';
 import IctPage from './pages/ict/ictPage';
 
 import EmpresaPage from './pages/empresa/empresaPage';
+import ProjetosPage from './pages/empresa/projetoPage';
 import UnauthorizedPage from './pages/unauthorizedPage';
 import ProtectedRoute from './services/protectedRoute';
 import { Navigate } from 'react-router-dom';
+import InteressesPage from './pages/empresa/interessesPage';
+import ParceriasPage from './pages/empresa/parceriasPage';
+import IctParceriasPage from './pages/ict/ictParceriaPage';
 
 
 function App() {
@@ -28,14 +32,6 @@ function App() {
 
           {/* Rotas do administrador */}
 
-          <Route 
-            path="/admin"
-            element={
-              <ProtectedRoute allowedRoles={['admin']}>
-                <AdminPage />
-              </ProtectedRoute>
-            }
-          />
           <Route
             path="/admin/empresas"
             element={
@@ -61,6 +57,14 @@ function App() {
             }
           />
           <Route
+            path="/empresa/projetos"
+            element={
+              <ProtectedRoute allowedRoles={['empresa']}>
+                <ProjetosPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/empresa"
             element={
               <ProtectedRoute allowedRoles={['empresa']}>
@@ -69,10 +73,34 @@ function App() {
             }
           />
           <Route
+            path="/empresa/interesses"
+            element={
+              <ProtectedRoute allowedRoles={['empresa']}>
+                <InteressesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/empresa/parcerias"
+            element={
+              <ProtectedRoute allowedRoles={['empresa']}>
+                <ParceriasPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/ict"
             element={
               <ProtectedRoute allowedRoles={['ict']}>
                 <IctPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ict/parcerias"
+            element={
+              <ProtectedRoute allowedRoles={['ict']}>
+                <IctParceriasPage />
               </ProtectedRoute>
             }
           />

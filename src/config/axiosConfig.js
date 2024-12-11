@@ -4,9 +4,6 @@ import { getAuthToken } from './authConfig.js';
 const api = axios.create({
   baseURL: 'http://127.0.0.1:3001',
   timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 // Interceptores de requisição para adicionar o token

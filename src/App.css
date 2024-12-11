@@ -6,6 +6,7 @@
   height: 40vmin;
   pointer-events: none;
 }
+
 .modal-backdrop {
   position: fixed;
   top: 0;

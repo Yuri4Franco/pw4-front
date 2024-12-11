@@ -17,7 +17,7 @@ function LoginPage() {
 
       // Redirecionar com base no tipo de usuário retornado
       if (userData.tipo === 'admin') {
-        navigate('/admin');
+        navigate('/admin/empresas');
       } else if (userData.tipo === 'empresa') {
         navigate('/empresa');
       } else if (userData.tipo === 'ict') {

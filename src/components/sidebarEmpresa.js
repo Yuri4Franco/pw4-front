@@ -2,15 +2,16 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-function Sidebar() {
+function SidebarEmpresa() {
   const location = useLocation();
   const navigate = useNavigate();
 
   // Links do menu
   const menuItems = [
-    { path: '/admin/empresas', label: 'Empresas' },
-    { path: '/admin/icts', label: 'ICTs' },
-    { path: '/admin/responsaveis', label: 'Responsáveis' },
+    { path: '/empresa', label: 'Início' },
+    { path: '/empresa/projetos', label: 'Meus Projetos' },
+    { path: '/empresa/interesses', label: 'Interessados' },
+    { path: '/empresa/parcerias', label: 'Parcerias' },
   ];
 
   // Função para deslogar
@@ -20,12 +21,14 @@ function Sidebar() {
     navigate('/login'); // Redireciona para a página de login
   };
 
+
   return (
     <div
       className="d-flex flex-column flex-shrink-0 p-3 bg-light"
       style={{ width: '250px', height: '100vh' }}
     >
-      <h3 className="text-center">Admin</h3>
+
+      <h3 className="text-center">Empresa</h3>
       <ul className="nav nav-pills flex-column mb-auto">
         {menuItems.map((item) => (
           <li key={item.path} className="nav-item">
@@ -52,4 +55,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SidebarEmpresa;
